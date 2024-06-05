@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+
+    <IsTestProject>true</IsTestProject>
+
+    <AssemblyName>Aspire.Contribs.Hosting.Java.Tests</AssemblyName>
+    <RootNamespace>Aspire.Contribs.Hosting.Java.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="$(CoverletVersion)" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNetTestSdkVersion)" />
+    <PackageReference Include="MSTest.TestAdapter" Version="$(MSTestVersion)" />
+    <PackageReference Include="MSTest.TestFramework" Version="$(MSTestVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Aspire.Contribs.Hosting.Java\Aspire.Contribs.Hosting.Java.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+  </ItemGroup>
+
+</Project>
