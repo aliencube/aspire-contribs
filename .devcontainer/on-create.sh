@@ -12,6 +12,10 @@ git config --global core.autocrlf input
 ## Enable local HTTPS for .NET
 dotnet dev-certs https --trust
 
+## Install .NET Aspire workload
+sudo dotnet workload install aspire
+sudo dotnet workload update --from-previous-sdk
+
 ## Install Spring Boot CLI
 sdk install springboot
 
