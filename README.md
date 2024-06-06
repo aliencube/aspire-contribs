@@ -3,10 +3,14 @@ This is a collection of community contributed libraries for .NET Aspire
 
 ## Prerequisites
 
-- JDK 17 and 21
-- Springboot CLI
+- [JDK 17+](https://learn.microsoft.com/java/openjdk/download)
+- [Springboot CLI](https://docs.spring.io/spring-boot/installing.html#getting-started.installing.cli)
+- [OpenTelemetry Agent for Java](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar)
+
 
 ## Getting Started
+
+
 
 ### Spring Boot App with Maven
 

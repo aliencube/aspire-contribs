@@ -15,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Aspire.Contribs.ApiApp\Aspire.Contribs.ApiApp.csproj" />
     <ProjectReference Include="..\Aspire.Contribs.Hosting.Java\Aspire.Contribs.Hosting.Java.csproj" IsAspireProjectResource="false" />
+    <ProjectReference Include="..\Aspire.Contribs.WebApp\Aspire.Contribs.WebApp.csproj" />
   </ItemGroup>
 
 </Project>

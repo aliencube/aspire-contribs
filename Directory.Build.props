@@ -8,13 +8,14 @@
     <Nullable>enable</Nullable>
 
     <AspireVersion>8.*</AspireVersion>
+    <AspNetCoreVersion>8.*</AspNetCoreVersion>
+    <CoverletVersion>6.*</CoverletVersion>
     <MicrosoftExtensionsVersion>8.*</MicrosoftExtensionsVersion>
+    <MicrosoftNetTestSdkVersion>17.*</MicrosoftNetTestSdkVersion>
+    <MSTestVersion>3.*</MSTestVersion>
     <OpenTelemetryExporterVersion>1.*</OpenTelemetryExporterVersion>
     <OpenTelemetryExtensionsVersion>1.*</OpenTelemetryExtensionsVersion>
     <OpenTelemetryInstrumentationVersion>1.*</OpenTelemetryInstrumentationVersion>
-
-    <CoverletVersion>6.*</CoverletVersion>
-    <MicrosoftNetTestSdkVersion>17.*</MicrosoftNetTestSdkVersion>
-    <MSTestVersion>3.*</MSTestVersion>
+    <SwashbuckleVersion>6.*</SwashbuckleVersion>
 </PropertyGroup>
 </Project>

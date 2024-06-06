@@ -44,7 +44,7 @@ public static class JavaAppHostingExtension
     /// <param name="scriptName">The npm script to execute. Defaults to "start".</param>
     /// <param name="args">The arguments to pass to the command.</param>
     /// <returns>A reference to the <see cref="IResourceBuilder{T}"/>.</returns>
-    public static IResourceBuilder<JavaAppResource> AddNpmApp(this IDistributedApplicationBuilder builder, string name, string workingDirectory, string scriptName = "start", string[]? args = null)
+    public static IResourceBuilder<JavaAppResource> AddSpringApp(this IDistributedApplicationBuilder builder, string name, string workingDirectory, string scriptName = "start", string[]? args = null)
     {
         string[] allArgs = args is { Length: > 0 }
             ? ["run", scriptName, "--", .. args]
@@ -61,5 +61,6 @@ public static class JavaAppHostingExtension
 
     private static IResourceBuilder<JavaAppResource> WithJavaDefaults(this IResourceBuilder<JavaAppResource> builder) =>
         builder.WithOtlpExporter()
-               .WithEnvironment("NODE_ENV", builder.ApplicationBuilder.Environment.IsDevelopment() ? "development" : "production");
+               //.WithEnvironment("NODE_ENV", builder.ApplicationBuilder.Environment.IsDevelopment() ? "development" : "production")
+               ;
 }
