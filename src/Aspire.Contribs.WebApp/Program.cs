@@ -1,5 +1,6 @@
 using Aspire.Contribs.WebApp.Clients;
 using Aspire.Contribs.WebApp.Components;
+using Aspire.Contribs.WebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,10 +10,15 @@ builder.AddServiceDefaults();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddHttpClient<IApiClient, ApiClient>(client =>
+builder.Services.AddHttpClient<IApiClient, WebApiClient>("apiapp", client =>
 {
     client.BaseAddress = new Uri("https+http://apiapp");
 });
+builder.Services.AddHttpClient<IApiClient, SpringApiClient>("springapp", client =>
+{
+    client.BaseAddress = new Uri("http://springapp");
+});
+builder.Services.AddScoped<IApiClientService, ApiClientService>();
 
 var app = builder.Build();
 
