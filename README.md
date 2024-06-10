@@ -21,7 +21,7 @@ spring init \
     --java-version=17 \
     --packaging=jar \
     --dependencies=web \
-    --group-id com.aliencube.aspire.contribs \
+    --group-id org.aliencube.aspire.contribs \
     --artifact-id=spring-maven \
     --name=spring-maven \
     aspire-contribs-spring-maven

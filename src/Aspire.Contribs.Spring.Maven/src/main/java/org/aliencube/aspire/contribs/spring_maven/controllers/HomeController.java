@@ -1,4 +1,4 @@
-package com.aliencube.aspire.contribs.spring_maven.controllers;
+package org.aliencube.aspire.contribs.spring_maven.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,7 @@ public class HomeController {
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, String> get() {
         Map<String, String> response = new HashMap<>();
-        response.put("weatherforecast", "/weatherforecast");
+        response.put("weatherforecast", "/api/weatherforecast");
 
         return response;
     }

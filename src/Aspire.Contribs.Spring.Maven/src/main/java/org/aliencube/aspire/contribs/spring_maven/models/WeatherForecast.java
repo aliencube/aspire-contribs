@@ -1,4 +1,4 @@
-package main.java.com.aliencube.aspire.contribs.spring_maven.models;
+package org.aliencube.aspire.contribs.spring_maven.models;
 
 import java.time.LocalDate;
 
