@@ -13,39 +13,34 @@ public static class JavaAppHostingExtension
     /// </summary>
     /// <param name="builder">The <see cref="IDistributedApplicationBuilder"/> to add the resource to.</param>
     /// <param name="name">The name of the resource.</param>
-    /// <param name="containerImageName">The name of the container image to use.</param>
-    /// <param name="containerImageTag">The tag of the container image to use. Defaults to "latest".</param>
-    /// <param name="containerRegistry">The container registry to use. If null, the default registry is used.</param>
-    /// <param name="port">The port to expose on the container. Defaults to 8080.</param>
-    /// <param name="targetPort">The target port to expose on the container. Defaults to 8080.</param>
-    /// <param name="agentPath">The path to the OpenTelemetry Java agent. Default is null</param>
-    /// <param name="args">The arguments to pass to the command.</param>
+    /// <param name="options">The <see cref="JavaAppResourceOptions"/> to configure the Java application.</param>"
     /// <returns>A reference to the <see cref="IResourceBuilder{T}"/>.</returns>
     public static IResourceBuilder<JavaAppResource> AddJavaApp(
         this IDistributedApplicationBuilder builder,
         string name,
-        string containerImageName,
-        string containerImageTag = "latest",
-        string? containerRegistry = null,
-        int port = 8080,
-        int targetPort = 8080,
-        string? agentPath = null,
-        string[]? args = null)
+        JavaAppResourceOptions options)
     {
+        if (string.IsNullOrWhiteSpace(options.ContainerImageName))
+        {
+            throw new ArgumentException("Container image name must be specified.", nameof(options));
+        }
+
         var resource = new JavaAppResource(name);
 
         var rb = builder.AddResource(resource);
-        if (containerRegistry is not null)
+        if (options.ContainerRegistry is not null)
         {
-            rb.WithImageRegistry(containerRegistry);
+            rb.WithImageRegistry(options.ContainerRegistry);
         }
-        rb.WithImage(containerImageName)
-          .WithImageTag(containerImageTag)
-          .WithHttpEndpoint(port: port, targetPort: targetPort, name: JavaAppResource.HttpEndpointName)
-          .WithJavaDefaults(agentPath);
-        if (args is { Length: > 0 })
+        rb.WithImage(options.ContainerImageName)
+          .WithImageTag(options.ContainerImageTag)
+          .WithHttpEndpoint(port: options.Port, targetPort: options.TargetPort, name: JavaAppResource.HttpEndpointName)
+          .WithJavaDefaults(options.OtelAgentPath);
+        if (options.Args is { Length: > 0 })
         {
-            rb.WithArgs(args);
+#pragma warning disable CS8604 // Possible null reference argument.
+            rb.WithArgs(options.Args);
+#pragma warning restore CS8604 // Possible null reference argument.
         }
 
         return rb;
@@ -56,32 +51,20 @@ public static class JavaAppHostingExtension
     /// </summary>
     /// <param name="builder">The <see cref="IDistributedApplicationBuilder"/> to add the resource to.</param>
     /// <param name="name">The name of the resource.</param>
-    /// <param name="containerImageName">The name of the container image to use.</param>
-    /// <param name="containerImageTag">The tag of the container image to use. Defaults to "latest".</param>
-    /// <param name="containerRegistry">The container registry to use. If null, the default registry is used.</param>
-    /// <param name="port">The port to expose on the container. Defaults to 8080.</param>
-    /// <param name="targetPort">The target port to expose on the container. Defaults to 8080.</param>
-    /// <param name="agentPath">The path to the OpenTelemetry Java agent. Default is null</param>
-    /// <param name="args">The arguments to pass to the command.</param>
+    /// <param name="options">The <see cref="JavaAppResourceOptions"/> to configure the Java application.</param>"
     /// <returns>A reference to the <see cref="IResourceBuilder{T}"/>.</returns>
     public static IResourceBuilder<JavaAppResource> AddSpringApp(
         this IDistributedApplicationBuilder builder,
         string name,
-        string containerImageName,
-        string containerImageTag = "latest",
-        string? containerRegistry = null,
-        int port = 8080,
-        int targetPort = 8080,
-        string? agentPath = null,
-        string[]? args = null)
+        JavaAppResourceOptions options)
     {
-        return builder.AddJavaApp(name, containerImageName, containerImageTag, containerRegistry, port, targetPort, agentPath, args);
+        return builder.AddJavaApp(name, options);
     }
 
     private static IResourceBuilder<JavaAppResource> WithJavaDefaults(
         this IResourceBuilder<JavaAppResource> builder,
-        string? agentPath = null) =>
+        string? otelAgentPath = null) =>
         builder.WithOtlpExporter()
-               .WithEnvironment("JAVA_TOOL_OPTIONS", $"-javaagent:{agentPath?.TrimEnd('/')}/opentelemetry-javaagent.jar")
+               .WithEnvironment("JAVA_TOOL_OPTIONS", $"-javaagent:{otelAgentPath?.TrimEnd('/')}/opentelemetry-javaagent.jar")
                ;
 }

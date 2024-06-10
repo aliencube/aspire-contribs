@@ -7,8 +7,10 @@ namespace Aspire.Contribs.Hosting.Java;
 /// A resource that represents a Java application.
 /// </summary>
 /// <param name="name">The name of the resource.</param>
-public class JavaAppResource(string name)
-    : ContainerResource(name), IResourceWithServiceDiscovery
+/// <param name="entrypoint">An optional container entrypoint.</param>
+
+public class JavaAppResource(string name, string? entrypoint = null)
+    : ContainerResource(name, entrypoint), IResourceWithServiceDiscovery
 {
     internal const string HttpEndpointName = "http";
 }
