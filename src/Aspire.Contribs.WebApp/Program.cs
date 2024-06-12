@@ -14,9 +14,13 @@ builder.Services.AddHttpClient<IApiClient, WebApiClient>("apiapp", client =>
 {
     client.BaseAddress = new Uri("https+http://apiapp");
 });
-builder.Services.AddHttpClient<IApiClient, SpringApiClient>("springapp", client =>
+builder.Services.AddHttpClient<IApiClient, SpringContainerClient>("containerapp", client =>
 {
-    client.BaseAddress = new Uri("http://springapp");
+    client.BaseAddress = new Uri("http://containerapp");
+});
+builder.Services.AddHttpClient<IApiClient, SpringExecutableClient>("executableapp", client =>
+{
+    client.BaseAddress = new Uri("http://executableapp");
 });
 builder.Services.AddScoped<IApiClientService, ApiClientService>();
 

@@ -10,6 +10,7 @@
     <AspireVersion>8.*</AspireVersion>
     <AspNetCoreVersion>8.*</AspNetCoreVersion>
     <CoverletVersion>6.*</CoverletVersion>
+    <FluentAssertionsVersion>6.*</FluentAssertionsVersion>
     <MicrosoftExtensionsVersion>8.*</MicrosoftExtensionsVersion>
     <MicrosoftNetTestSdkVersion>17.*</MicrosoftNetTestSdkVersion>
     <MSTestVersion>3.*</MSTestVersion>
@@ -17,5 +18,6 @@
     <OpenTelemetryExtensionsVersion>1.*</OpenTelemetryExtensionsVersion>
     <OpenTelemetryInstrumentationVersion>1.*</OpenTelemetryInstrumentationVersion>
     <SwashbuckleVersion>6.*</SwashbuckleVersion>
+    <XunitVersion>2.*</XunitVersion>
 </PropertyGroup>
 </Project>

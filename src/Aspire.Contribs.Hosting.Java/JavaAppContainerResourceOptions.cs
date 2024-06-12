@@ -1,9 +1,9 @@
 ﻿namespace Aspire.Contribs.Hosting.Java;
 
 /// <summary>
-/// This represents the options entity for configuring a Java application.
+/// This represents the options entity for configuring a Java application running in a container.
 /// </summary>
-public class JavaAppResourceOptions
+public class JavaAppContainerResourceOptions
 {
     /// <summary>
     /// Gets or sets the container registry.

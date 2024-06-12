@@ -28,8 +28,12 @@ RUN mkdir -p ${AGENT_PATH}
 RUN wget -P ${AGENT_PATH} https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
 RUN chmod +x ${AGENT_PATH}/opentelemetry-javaagent.jar
 
-# Make port 8080 available to the outside this container
-EXPOSE 8080
+# Set the default server port
+ARG SERVER_PORT=8080
+ENV SERVER_PORT=${SERVER_PORT}
+
+# Make port available to the outside this container
+EXPOSE ${SERVER_PORT}
 
 # Run the jar file
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app/app.jar"]
+ENTRYPOINT [ "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app/app.jar" ]
