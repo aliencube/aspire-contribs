@@ -6,12 +6,12 @@
 public class JavaAppExecutableResourceOptions
 {
     /// <summary>
-    /// Gets or sets the application name.
+    /// Gets or sets the application name. Default is <c>target/app.jar</c>.
     /// </summary>
     public string? ApplicationName { get; set; } = "target/app.jar";
 
     /// <summary>
-    /// Gets or sets the port number.
+    /// Gets or sets the port number. Default is <c>8080</c>.
     /// </summary>
     public int Port { get; set; } = 8080;
 
