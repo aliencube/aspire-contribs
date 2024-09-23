@@ -8,6 +8,8 @@
 
     <AssemblyName>Aspire.Contribs.AppHost</AssemblyName>
     <RootNamespace>Aspire.Contribs.AppHost</RootNamespace>
+
+    <JavaAppRoot>$(MSBuildProjectDirectory)/../Aspire.Contribs.Spring.Maven</JavaAppRoot>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,5 +21,10 @@
     <ProjectReference Include="..\Aspire.Contribs.Hosting.Java\Aspire.Contribs.Hosting.Java.csproj" IsAspireProjectResource="false" />
     <ProjectReference Include="..\Aspire.Contribs.WebApp\Aspire.Contribs.WebApp.csproj" />
   </ItemGroup>
+
+  <Target Name="PublishRunMaven" AfterTargets="Build">
+    <!-- As part of publishing, ensure the Java app is freshly built -->
+    <Exec WorkingDirectory="$(JavaAppRoot)" Command="./mvnw --quiet clean package" />
+  </Target>
 
 </Project>

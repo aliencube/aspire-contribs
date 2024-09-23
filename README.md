@@ -11,6 +11,8 @@ This is a collection of community contributed libraries for .NET Aspire
 
 ## For Java App
 
+### Download OpenTelemetry agent
+
 1. First of all, you should have [OpenTelemetry Agent for Java](https://opentelemetry.io/docs/zero-code/java/agent/). You can download it to your local machine by running the following commands:
 
     ```bash
@@ -25,6 +27,8 @@ This is a collection of community contributed libraries for .NET Aspire
         -OutFile "./agents/opentelemetry-javaagent.jar" `
         -Uri "https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar"
     ```
+
+### Build container image
 
 1. Build the Spring app with Maven:
 
@@ -55,6 +59,21 @@ This is a collection of community contributed libraries for .NET Aspire
 
    > **NOTE**: You need to log in to Docker Hub before pushing the image.
 
+### Run .NET Aspire
+
+1. If you want to integrate the containerised Spring app built above, open `src/Aspire.Contribs.AppHost/Program.cs` and update the following line:
+
+    ```csharp
+    var containerapp = builder.AddSpringApp("containerapp",
+                               new JavaAppContainerResourceOptions()
+                               {
+                                   // ⬇️⬇️⬇️ Update this line with your container image
+                                   ContainerImageName = "aliencube/aspire-spring-maven-sample",
+                                   // ⬆️⬆️⬆️ Update this line with your container image
+                                   OtelAgentPath = "/agents"
+                               });
+    ```
+
 1. Run .NET Aspire dashboard:
 
     ```bash
@@ -68,10 +87,6 @@ This is a collection of community contributed libraries for .NET Aspire
 1. Open the web app in your browser and navigate to the `/weather` page and see the weather information from ASP.NET Core Web API app, Spring container app and Spring executable app.
 
     ![Weather Page](./images/weather.png)
-
-## For Python App
-
-TBD
 
 ## For Azure API Management
 
